@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background: radial-gradient(circle, #1a2a6c, #b21f1f, #fdbb2d); /* Dark gradient background */
+      color: white;
+      overflow: hidden;
+    }
+
+    #countdown {
+      text-align: center;
+      font-size: 4rem;
+      font-weight: bold;
+      letter-spacing: 5px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3); /* Glowing effect */
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.5), 0 0 45px rgba(255, 255, 255, 0.3); /* Glowing effect */
+      margin-bottom: 20px;
+    }
+
+    .time-section {
+      font-size: 6rem;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 20px rgba(255, 255, 255, 0.7);
+      margin: 10px 0;
+    }
+
+    span {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    /* Image Styling */
+    .party-image {
+      margin-bottom: 30px;
+      width: 150px; /* Adjust size of the image */
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Party Image -->
+  <img class="party-image" src="https://cdn-icons-png.flaticon.com/512/7626/7626666.png" alt="Party Time Icon">
+
+  <div id="countdown">
+    <h1>Countdown to Party Time!</h1>
+    <div id="timer">
+      <div class="time-section" id="weeks"><span>0</span> WEEKS</div>
+      <div class="time-section" id="days"><span>0</span> DAYS</div>
+      <div class="time-section" id="hours"><span>0</span> HOURS</div>
+      <div class="time-section" id="minutes"><span>0</span> MINUTES</div>
+      <div class="time-section" id="seconds"><span>0</span> SECONDS</div>
+    </div>
+  </div>
+
+  <script>
+    // Set the countdown target to 30 December 2024 at 12:30:00 PM
+    const countdownDate = new Date('Dec 30, 2024 12:30:00').getTime();
+
+    // Update the countdown every second
+    const countdownFunction = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = countdownDate - now;
+
+      // Calculate time components
+      const weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
+      const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Update the countdown elements
+      document.getElementById("weeks").querySelector('span').innerHTML = weeks;
+      document.getElementById("days").querySelector('span').innerHTML = days;
+      document.getElementById("hours").querySelector('span').innerHTML = hours;
+      document.getElementById("minutes").querySelector('span').innerHTML = minutes;
+      document.getElementById("seconds").querySelector('span').innerHTML = seconds;
+
+      // When the countdown is over, display a message
+      if (distance < 0) {
+        clearInterval(countdownFunction);
+        document.getElementById("timer").innerHTML = "Party Time!";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
